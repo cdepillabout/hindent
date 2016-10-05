@@ -129,6 +129,10 @@ inter sep ps =
 lined :: [Printer ()] -> Printer ()
 lined ps = sequence_ (intersperse newline ps)
 
+-- | Print all the printers separated by two newlines.
+doubleLined :: [Printer ()] -> Printer ()
+doubleLined ps = sequence_ (intersperse (newline >> newline) ps)
+
 -- | Print all the printers separated newlines and optionally a line
 -- prefix.
 prefixedLined :: String -> [Printer ()] -> Printer ()
@@ -749,7 +753,7 @@ decl (InstDecl _ moverlap dhead decls) =
                                     (write " where"))))
      unless (null (fromMaybe [] decls))
             (do newline
-                indentedBlock (lined (map pretty (fromMaybe [] decls))))
+                indentedBlock (doubleLined (map pretty (fromMaybe [] decls))))
 decl (SpliceDecl _ e) = pretty e
 decl (TypeSig _ names ty) =
   depend (do inter (write ", ")
