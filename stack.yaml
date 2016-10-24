@@ -6,4 +6,3 @@ extra-deps:
 - descriptive-0.9.4
 - path-0.5.9
 - path-io-1.2.0
-- hsc2hs-0.68
